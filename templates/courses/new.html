@@ -1,34 +1,41 @@
 {% extends "layout.html" %}
 
+{% block header %}
+  <h1 class="mt-6 mb-4 text-3xl font-bold">Новый курс</h1>
+{% endblock %}
+
 {% block content %}
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8">
-      <div class="card shadow-sm">
-        <div class="card-body row p-5">
-          <div class="col-12 col-md-6 mt-3 mt-md-0">
-            <form action="{{ url_for('create_course') }}" method="post">
-              <input name="csrf_token" type="hidden" value="{{ csrf_token }}" />
+  <div
+    class="mx-auto max-w-xl rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+  >
+    <form action="{{ url_for('create_course') }}" method="post">
+      <input name="csrf_token" type="hidden" value="{{ csrf_token }}" />
 
-              <div class="mb-3">
-                <label for="title">Название</label>
-                <input
-                  class="form-control"
-                  id="title"
-                  name="title"
-                  value="{{ form.title | default('') }}"
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="description">Описание</label>
-                <textarea class="form-control" id="description" name="description">{{ form.description | default('') }}</textarea>
-              </div>
-
-              <input class="btn btn-primary" type="submit" value="Создать" />
-            </form>
-          </div>
-        </div>
+      <div class="mb-4">
+        <label class="mb-1 block text-sm font-medium" for="title">Название</label>
+        <input
+          class="w-full rounded border border-gray-300 px-3 py-2"
+          id="title"
+          name="title"
+          value="{{ form.title | default('') }}"
+        />
       </div>
-    </div>
+
+      <div class="mb-4">
+        <label class="mb-1 block text-sm font-medium" for="description">Описание</label>
+        <textarea
+          class="w-full rounded border border-gray-300 px-3 py-2"
+          id="description"
+          name="description"
+          rows="4"
+        >{{ form.description | default('') }}</textarea>
+      </div>
+
+      <input
+        class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+        type="submit"
+        value="Создать"
+      />
+    </form>
   </div>
 {% endblock %}
