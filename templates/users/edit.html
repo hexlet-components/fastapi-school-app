@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body row p-5">
+          <div class="col-12 col-md-6 mt-3 mt-md-0">
+            <form
+              action="{{ url_for('update_user', user_id=user.id) }}"
+              method="post"
+            >
+              <input name="csrf_token" type="hidden" value="{{ csrf_token }}" />
+
+              <div class="mb-3">
+                <label for="name">Имя</label>
+                <input
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  value="{{ form.name }}"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="email">Емейл</label>
+                <input
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  value="{{ form.email }}"
+                />
+              </div>
+
+              {# Пароль в поле не подставляется: форма запрашивает его заново. #}
+              <div class="mb-3">
+                <label for="password">Пароль</label>
+                <input
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  type="password"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="password_confirmation">Подтверждение пароля</label>
+                <input
+                  class="form-control"
+                  id="password_confirmation"
+                  name="password_confirmation"
+                  type="password"
+                />
+              </div>
+
+              <input class="btn btn-primary" type="submit" value="Сохранить" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

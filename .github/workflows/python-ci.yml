@@ -1,0 +1,27 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # setup-python не нужен: версию питона держит .python-version, и uv сам
+      # ставит её при первом `uv sync`.
+      - uses: astral-sh/setup-uv@v10.0.0
+
+      - name: Install
+        run: make install
+      - name: Run linter
+        run: make lint
+      - name: Run tests
+        run: make test
