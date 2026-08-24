@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.database import prepare_database
@@ -21,6 +22,9 @@ app.add_middleware(
     secret_key="development-secret-change-me",
     session_cookie="school_session",
 )
+
+# Собранный css лежит в app/static: его пишет tailwind из assets/css/source.css.
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(root.router)
 app.include_router(courses.router)

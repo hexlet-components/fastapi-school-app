@@ -37,6 +37,17 @@ def create_course(client, title):
     return int(match.group(1))
 
 
+# Сборка стилей проверяется прогоном: её отказ выглядит как успех, потому что
+# main.css оказывается на месте, а классов из шаблонов в нём нет, и страница
+# приходит без оформления.
+def test_styles(client):
+    res = client.get("/static/css/main.css")
+
+    assert res.status_code == 200
+    assert ".max-w-5xl" in res.text
+    assert ".bg-green-50" in res.text
+
+
 def test_pages(client):
     course_id = create_course(client, "Страницы")
 

@@ -7,3 +7,6 @@ dist/
 .pytest_cache/
 *.sqlite
 .ruff_cache/
+node_modules/
+# css собирается из assets/css/source.css целью build-css
+app/static/css/main.css

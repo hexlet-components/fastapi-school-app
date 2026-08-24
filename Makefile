@@ -1,7 +1,13 @@
 PORT ?= 8000
 
+setup: install build-css
+
 install:
 	uv sync
+	pnpm install
+
+build-css:
+	pnpm run build:css
 
 dev:
 	uv run fastapi dev app/main.py --port $(PORT)

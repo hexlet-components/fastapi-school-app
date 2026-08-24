@@ -19,8 +19,19 @@ jobs:
       # ставит её при первом `uv sync`.
       - uses: astral-sh/setup-uv@v10.0.1
 
+      # Стили собирает tailwind, поэтому в питоновом репозитории появился node.
+      # pnpm ставится до setup-node: тот с cache: pnpm ищет уже существующий
+      # бинарь, чтобы вычислить путь к store.
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26.x
+          cache: pnpm
+
       - name: Install
         run: make install
+      - name: Build css
+        run: make build-css
       - name: Run linter
         run: make lint
       - name: Run tests
