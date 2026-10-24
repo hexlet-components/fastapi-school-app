@@ -10,3 +10,4 @@ dist/
 node_modules/
 # css собирается из assets/css/source.css целью build-css
 app/static/css/main.css
+.lycheecache
